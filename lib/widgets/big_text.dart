@@ -12,7 +12,7 @@ class BigText extends StatelessWidget{
     this.paramColor = const Color(0xFF332d2b), //default color
     required this.paramText,
     this.paramOverFlow = TextOverflow.ellipsis,
-    this.paramSize = 20
+    this.paramSize = 18
   }) : super(key: key);
 
   @override
@@ -23,7 +23,7 @@ class BigText extends StatelessWidget{
       overflow: paramOverFlow,
       style: TextStyle(
         color: paramColor,
-        fontWeight: FontWeight.w400,
+        fontWeight: FontWeight.w500,
         fontFamily: 'Poppins',
         fontSize: paramSize
       ),
