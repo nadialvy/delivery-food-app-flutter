@@ -1,3 +1,4 @@
+import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:food_delivery_app/utils/colors.dart';
@@ -34,55 +35,70 @@ class _FoodPageBodyState extends State<FoodPageBody> {
   @override //2. when you leave the page you dispose them, coz u dont need it anymore
   void dispose(){
     pageController.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 320,
-      child: PageView.builder(
-        controller: pageController,
-        itemCount: 5, //position will connected to item count, position is an index, so it will to be 0 - 4
-        itemBuilder: (context, position){
-        return _buildPageItem(position);
-      }),
+    return Column(
+      children: [
+        Container(
+          height: 320,
+          child: PageView.builder(
+            controller: pageController,
+            itemCount: 5, //position will connected to item count, position is an index, so it will to be 0 - 4
+            itemBuilder: (context, position){
+            return _buildPageItem(position);
+          }),
+        ),
+        DotsIndicator(
+          dotsCount: 5,
+          position: _currPageVal,
+          decorator: DotsDecorator(
+            activeColor: AppColors.mainColor,
+            size: const Size.square(9.0),
+            activeSize: const Size(18.0, 9.0),
+            activeShape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
+          ),
+        )
+      ],
     );
   }
 
   Widget _buildPageItem(int position) {
     //scalling pict
     Matrix4 matrix = Matrix4.identity();
-    //current slide
-    if(position == _currPageVal.floor()){
+    
+    if(position == _currPageVal.floor()){ //current slide
       var currScale = 1-(_currPageVal - position) * (1 - _scaleFactor);
       var currTrans = _height * (1 - currScale) / 2;
       matrix = Matrix4.diagonal3Values(1, currScale, 1)..setTranslationRaw(0, currTrans, 0);
     }
-    //next slide
-    else if(position == _currPageVal.floor() + 1){
+
+    else if(position == _currPageVal.floor() + 1){ //next slide
       var currScale = _scaleFactor + (_currPageVal - position + 1) * (1 - _scaleFactor);
       var currTrans = _height * (1 - currScale) / 2;
       matrix = Matrix4.diagonal3Values(1, currScale, 1);
       matrix = Matrix4.diagonal3Values(1, currScale, 1)..setTranslationRaw(0, currTrans, 0);
     }
-    // previous slide
-    else if(position == _currPageVal.floor() - 1){
+    
+    else if(position == _currPageVal.floor() - 1){ // previous slide
       var currScale = 1-(_currPageVal - position) * (1 - _scaleFactor);
       var currTrans = _height * (1 - currScale) / 2;
       matrix = Matrix4.diagonal3Values(1, currScale, 1);
       matrix = Matrix4.diagonal3Values(1, currScale, 1)..setTranslationRaw(0, currTrans, 0);
     }
-    //the pict after current pict
-    else{
+    
+    else{ //the pict after current pict
       var currScale = 0.8;
       matrix = Matrix4.diagonal3Values(1, currScale, 1)..setTranslationRaw(0, _height * (1 - _scaleFactor) / 2, 0);
     }
-    
 
     return Transform(
       transform: matrix,
       child: Stack(
         children: [
+          // Carousel images
           Container(
             height: 220,
             margin: const EdgeInsets.only(left: 10, right: 10),
@@ -97,6 +113,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
               ),
             ),
           ),
+          // Box Information
           Align(
             alignment: Alignment.bottomCenter,
             child: Container(
@@ -122,6 +139,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                   ),
                 ],
               ),
+              //Text Information
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -164,7 +182,6 @@ class _FoodPageBodyState extends State<FoodPageBody> {
               ),
             ),
           ),
-          
         ],
       ),
     );
