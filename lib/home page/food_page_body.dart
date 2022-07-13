@@ -2,6 +2,7 @@ import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:food_delivery_app/utils/colors.dart';
+import 'package:food_delivery_app/utils/dimension.dart';
 import 'package:food_delivery_app/widgets/big_text.dart';
 import 'package:food_delivery_app/widgets/icon_and_text_widget.dart';
 import 'package:food_delivery_app/widgets/small_text.dart';
@@ -19,7 +20,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
   );
   var _currPageVal = 0.0;
   double _scaleFactor = 0.8;
-  double _height = 220;
+  double _height = Dimensions.pageViewContainer;
 
   @override //1. initialise necessary things that your page should need
   void initState(){ //method in stateful class
@@ -43,7 +44,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
     return Column(
       children: [
         Container(
-          height: 320,
+          height: Dimensions.pageView,
           child: PageView.builder(
             controller: pageController,
             itemCount: 5, //position will connected to item count, position is an index, so it will to be 0 - 4
@@ -100,10 +101,10 @@ class _FoodPageBodyState extends State<FoodPageBody> {
         children: [
           // Carousel images
           Container(
-            height: 220,
-            margin: const EdgeInsets.only(left: 10, right: 10),
+            height: Dimensions.pageViewContainer,
+            margin: EdgeInsets.only(left: Dimensions.width10, right: Dimensions.width10),
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20),
+              borderRadius: BorderRadius.circular(Dimensions.radius20),
               color: position.isEven? Color(0xFF69c5df) : Color(0xFF9294cc),
               image: DecorationImage(
                 fit: BoxFit.cover,
@@ -117,11 +118,11 @@ class _FoodPageBodyState extends State<FoodPageBody> {
           Align(
             alignment: Alignment.bottomCenter,
             child: Container(
-              padding: const EdgeInsets.only(top: 10, left: 15, right: 15),
-              height: 120,
-              margin: const EdgeInsets.only(left: 30, right: 30, bottom: 30),
+              height: Dimensions.pageViewTextContainer,
+              padding: EdgeInsets.only(top: Dimensions.height10, left: Dimensions.width15, right: Dimensions.width15),
+              margin: EdgeInsets.only(left: Dimensions.width15, right: Dimensions.width15, bottom: Dimensions.height30),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
+                borderRadius: BorderRadius.circular(Dimensions.radius20),
                 color: Colors.white,
                 boxShadow: const [
                   BoxShadow(
@@ -144,7 +145,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   BigText(paramText: 'Chinese Noodle Soup'),
-                  const SizedBox(height: 10),
+                  SizedBox(height: Dimensions.height10),
                   Row(
                     children: [
                       Wrap(
@@ -158,8 +159,9 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                       SmallText(paramText: 'comments'),
                     ],
                   ),
-                  const SizedBox(height: 20,),
+                  SizedBox(height: Dimensions.height20,),
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: const [
                       IconAndTextWidget(
                         icon: Icons.circle_sharp,

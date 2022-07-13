@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:food_delivery_app/utils/colors.dart';
+import 'package:food_delivery_app/utils/dimension.dart';
 
 class BigText extends StatelessWidget{
   Color? paramColor; //pass a color variable
@@ -12,7 +13,7 @@ class BigText extends StatelessWidget{
     this.paramColor = const Color(0xFF332d2b), //default color
     required this.paramText,
     this.paramOverFlow = TextOverflow.ellipsis,
-    this.paramSize = 18
+    this.paramSize = 0
   }) : super(key: key);
 
   @override
@@ -25,7 +26,7 @@ class BigText extends StatelessWidget{
         color: paramColor,
         fontWeight: FontWeight.w500,
         fontFamily: 'Poppins',
-        fontSize: paramSize
+        fontSize: paramSize == 0 ? Dimensions.font18 : paramSize,
       ),
     );
   }
