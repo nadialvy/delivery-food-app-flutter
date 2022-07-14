@@ -43,6 +43,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
   Widget build(BuildContext context) {
     return Column(
       children: [
+        //carousel
         Container(
           height: Dimensions.pageView,
           child: PageView.builder(
@@ -52,6 +53,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
             return _buildPageItem(position);
           }),
         ),
+        //dot
         DotsIndicator(
           dotsCount: 5,
           position: _currPageVal,
@@ -61,6 +63,113 @@ class _FoodPageBodyState extends State<FoodPageBody> {
             activeSize: const Size(18.0, 9.0),
             activeShape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
           ),
+        ),
+        //popular text
+        SizedBox(height: Dimensions.height30),
+        Container(
+          margin: EdgeInsets.only(left: Dimensions.width20, bottom: Dimensions.height20),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              BigText(paramText: 'Popular'),
+              SizedBox(width: Dimensions.width10),
+              Container(
+                margin: const EdgeInsets.only(bottom: 3),
+                child: BigText(paramText: '.', paramColor: Colors.black26,),
+              ),
+              SizedBox(width: Dimensions.width10),
+              Container(
+                margin: const EdgeInsets.only(bottom: 4),
+                child: SmallText(paramText: 'Food Pairing'),
+              ),
+            ],
+          ),
+        ),
+        //list of food and images
+        ListView.builder(
+          physics: NeverScrollableScrollPhysics(),
+          shrinkWrap: true,
+          itemCount: 10,
+          itemBuilder: (context, index){
+            return Container(
+              margin: EdgeInsets.only(left: Dimensions.width20, right: Dimensions.width20, bottom: Dimensions.height10),
+              child: Row(
+                children: [
+                  //image section
+                  Container(
+                    width: Dimensions.image90,
+                    height: Dimensions.image90,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(Dimensions.radius10),
+                      color: Colors.white38,
+                      image: DecorationImage(
+                        fit: BoxFit.cover,
+                        image: AssetImage(
+                          "image/food01.jpg"
+                        ),
+                      ),
+                    ),
+                  ),
+                  //detail section
+                  Expanded( //to make width take all of available space
+                    child: Container(
+                      height: 100,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.only(
+                          topRight: Radius.circular(Dimensions.radius10),
+                          bottomRight: Radius.circular(Dimensions.radius10)
+                        ),
+                        boxShadow: const [
+                          BoxShadow(
+                            color: Color.fromARGB(255, 203, 200, 200),
+                            blurRadius: 2.0,
+                            offset: Offset(0, 5),
+                          ),
+                        ],
+                        color: Colors.white,
+                      ),
+                      child: Padding(
+                        padding: EdgeInsets.only(left: Dimensions.width10, right: Dimensions.width10),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            BigText(paramText: 'Chicken Noodle Soup with the Soda on the side', paramSize: 16,),
+                            SmallText(paramText: 'Good soup'),
+                            SizedBox(height: Dimensions.height10,),
+                            Wrap(
+                              children: [
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    IconAndTextWidget(
+                                      icon: Icons.circle_sharp,
+                                      text: 'Normal',
+                                      iconColor: AppColors.iconColor1, iconSize: Dimensions.iconSize12,
+                                    ),
+                                    IconAndTextWidget(
+                                      icon: Icons.location_on,
+                                      text: '1.7km',
+                                      iconColor: AppColors.mainColor, iconSize: Dimensions.iconSize12,
+                                    ),
+                                    IconAndTextWidget(
+                                      icon: Icons.access_time,
+                                      text: '32 mins',
+                                      iconColor: AppColors.iconColor2, iconSize: Dimensions.iconSize12,
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            );
+          }
         )
       ],
     );
@@ -144,7 +253,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  BigText(paramText: 'Chinese Noodle Soup'),
+                  BigText(paramText: 'Chicken Noodle Soup'),
                   SizedBox(height: Dimensions.height10),
                   Row(
                     children: [
@@ -162,21 +271,21 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                   SizedBox(height: Dimensions.height20,),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: const [
+                    children: [
                       IconAndTextWidget(
                         icon: Icons.circle_sharp,
                         text: 'Normal',
-                        iconColor: AppColors.iconColor1
+                        iconColor: AppColors.iconColor1, iconSize: Dimensions.iconSize24,
                       ),
                       IconAndTextWidget(
                         icon: Icons.location_on,
                         text: '1.7km',
-                        iconColor: AppColors.mainColor
+                        iconColor: AppColors.mainColor, iconSize: Dimensions.iconSize24,
                       ),
                       IconAndTextWidget(
                         icon: Icons.access_time,
                         text: '32 mins',
-                        iconColor: AppColors.iconColor2
+                        iconColor: AppColors.iconColor2, iconSize: Dimensions.iconSize24,
                       ),
                     ],
                   )
