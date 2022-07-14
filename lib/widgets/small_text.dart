@@ -9,9 +9,9 @@ class SmallText extends StatelessWidget{
 
   SmallText({
     Key? key,
-    this.paramColor = const Color(0xFFccc7c5), //default color
+    this.paramColor = const Color.fromARGB(255, 77, 76, 75), //default color
     required this.paramText,
-    this.paramSize = 12,
+    this.paramSize = 14,
     this.paramHeight = 1.1
   }) : super(key: key);
 
